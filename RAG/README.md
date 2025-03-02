@@ -12,6 +12,11 @@ This is a RAG (Retrieval-Augmented Generation) based chatbot that answers questi
 - Async request handling
 - Comprehensive error handling and logging
 
+## Document 
+- https://arxiv.org/pdf/2311.17696
+
+## Arch
+![](images/img.png)
 ## Setup
 
 1. Create a virtual environment and activate it:
