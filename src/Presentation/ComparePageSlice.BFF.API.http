@@ -1,0 +1,6 @@
+@ComparePageSlice.BFF.API_HostAddress = http://localhost:5119
+
+GET {{ComparePageSlice.BFF.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
