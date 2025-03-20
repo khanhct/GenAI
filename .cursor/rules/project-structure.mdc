@@ -9,63 +9,60 @@ alwaysApply: true
 This document outlines the structure of the **Electrolux.BFF.{Name}** project. {Name} is the name of project such as: if project name is Home Page then value of {Name} is HomePage.It serves as a reference for understanding the organization of the codebase, including constants, DTOs, functions, models, and services.
 
 ## Directory Structure
-t1rearc-bff-{Name}
+```
+Electrolux.BFF.{Name}
+├── Constants
+│   ├── Constants.cs
 │
-├── Electrolux.BFF.{Name}
-│   ├── Constants
-│   │   ├── Constants.cs
-│   │
-│   ├── Dtos
-│   │   ├── UpdateRouteRequest.cs
-│   │   ├── UpdateRouteResponse.cs
-│   │
-│   ├── Functions
-│   │   ├── RoutingFunction.cs
-│   │
-│   ├── Models
-│   │   ├── RoutingCacheModel.cs
-│   │
-│   ├── Properties
-│   │   ├── serviceDependencies.json
-│   │   ├── serviceDependencies.local.json
-│   │
-│   ├── Services
-│   │   ├── Handlers
-│   │   │   ├── GetErrorPagePropsHandler.cs
-│   │   │   ├── GetRedirectSlugHandler.cs
-│   │   │
-│   │   ├── Interfaces
-│   │   │   ├── IPageService.cs
-│   │   │   ├── IRoutingService.cs
-│   │   │
-│   │   ├── PageService.cs
-│   │   ├── RoutingService.cs
-│   │
-│   ├── .gitignore
-│   ├── App.cs
-│   ├── appsettings.json
-│   ├── Electrolux.BFF.{Name}.csproj
-│   ├── host.json
-│   ├── Program.cs
+├── Dtos
+│   ├── UpdateRouteRequest.cs
+│   ├── UpdateRouteResponse.cs
 │
-├── Electrolux.BFF.{Name}.Tests
-│   │── Constants/
-│   │   └── Constants.cs
-│   │── Functions/s
-│   │   └── RoutingFunctionTests.cs
-│   │── Services/
-│   │   ├── Handlers/
-│   │   ├── Interfaces/
-│   │   └── RoutingServiceTests.cs
-│   │── Electrolux.BFF.{Name}.Tests.csproj
-├── .gitmodules
-├── .runsettings
-├── azure-pipelines.yml
-├── elux.ruleset
-├── GitVersion.yml
-├── nuget.config
-├── README.md
-├── T1ReArcBFF.sln
+├── Functions
+│   ├── RoutingFunction.cs
+│
+├── Models
+│   ├── RoutingCacheModel.cs
+│
+├── Properties
+│   ├── serviceDependencies.json
+│   ├── serviceDependencies.local.json
+│
+├── Services
+│   ├── Handlers
+│   │   ├── GetErrorPagePropsHandler.cs
+│   │   ├── GetRedirectSlugHandler.cs
+│   │
+│   ├── Interfaces
+│   │   ├── IPageService.cs
+│   │   ├── IRoutingService.cs
+│   │
+│   ├── PageService.cs
+│   ├── RoutingService.cs
+│
+├── .gitignore
+├── App.cs
+├── appsettings.json
+├── Electrolux.BFF.{Name}.csproj
+├── host.json
+├── Program.cs
+│
+Electrolux.BFF.{Name}.Tests
+├── Constants
+│   ├── Constants.cs
+│
+├── Functions
+│   ├── RoutingFunctionTests.cs
+│
+├── Services
+│   ├── Handlers
+│   ├── Interfaces
+│   ├── RoutingServiceTests.cs
+│
+├── Electrolux.BFF.{Name}.Tests.csproj
+README.md
+Electrolux.BFF.{Name}.sln
+```
 
 ## Components Breakdown
 

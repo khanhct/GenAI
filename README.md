@@ -1,90 +1,113 @@
 # Electrolux.BFF.ComparePage
 
-Backend-for-Frontend (BFF) service for the Compare Page functionality. This service acts as an intermediary between the frontend and backend services, providing optimized and aggregated data for the product comparison feature.
-
-## Features
-
-- Product comparison data retrieval
-- Market and language-specific content handling
-- Response caching for improved performance
-- Correlation ID tracking for request tracing
-- Error handling and logging
+Backend-for-Frontend (BFF) service for the Compare Page Slice, built using Azure Functions v4 and .NET 8.
 
 ## Project Structure
 
 ```
 Electrolux.BFF.ComparePage/
-│── Constants/           # Constant values and configuration
-│── Dtos/               # Data Transfer Objects
-│── Functions/          # Azure Functions
-│── Models/             # Domain models
-│── Properties/         # Project properties
-│── Services/           # Business logic implementation
-    ├── Handlers/       # Request handlers
-    └── Interfaces/     # Service interfaces
+├── Constants/
+├── Dtos/
+├── Functions/
+│   └── HealthCheckFunction.cs
+├── Middleware/
+│   └── AuthorizationMiddleware.cs
+├── Models/
+├── Services/
+│   ├── Handlers/
+│   └── Interfaces/
+├── Program.cs
+├── host.json
+└── Electrolux.BFF.ComparePage.csproj
+
+Electrolux.BFF.ComparePage.Tests/
+├── Functions/
+│   └── HealthCheckFunctionTests.cs
+└── Electrolux.BFF.ComparePage.Tests.csproj
 ```
 
-## Getting Started
+## Prerequisites
 
-### Prerequisites
+- .NET 8 SDK
+- Azure Functions Core Tools v4
+- Visual Studio 2022 or VS Code with C# extension
+- Azure subscription for deployment
 
-- .NET 8.0 SDK
-- Azure Functions Core Tools
-- Visual Studio 2022 or VS Code
+## Local Development Setup
 
-### Local Development
-
-1. Clone the repository
-2. Initialize and update git submodules:
+1. Clone the repository:
    ```bash
-   git submodule init
-   git submodule update
+   git clone <repository-url>
    ```
-3. Restore dependencies:
+
+2. Install dependencies:
    ```bash
    dotnet restore
    ```
-4. Run the project:
-   ```bash
-   dotnet run
+
+3. Create a `local.settings.json` file in the Electrolux.BFF.ComparePage directory:
+   ```json
+   {
+     "IsEncrypted": false,
+     "Values": {
+       "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+       "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+       "T1Api:BaseUrl": "https://api.t1.com",
+       "AuthApi:BaseUrl": "https://auth.t1.com"
+     },
+     "ConnectionStrings": {
+       "RedisConnection": "your-redis-connection-string"
+     }
+   }
    ```
 
-### Testing
+4. Run the project:
+   ```bash
+   cd Electrolux.BFF.ComparePage
+   func start
+   ```
 
-Run the tests using:
-```bash
-dotnet test
-```
+5. Run tests:
+   ```bash
+   dotnet test
+   ```
 
-## API Endpoints
+## Features
 
-### Compare Products
+- Health Check endpoint at `GET /api/health`
+- Azure Application Insights integration
+- Redis Cache integration
+- Clean Architecture implementation
+- Authentication and Authorization middleware
+  - Supports B2B and D2C user scenarios
+  - Integrates with T1 API for access rights
+  - Handles redirects based on user context
 
-```http
-POST /api/compare
-```
+## Development Guidelines
 
-Headers:
-- `x-correlation-id`: Request correlation ID
-- `x-market`: Market code
-- `x-language`: Language code
+1. Follow Clean Architecture principles
+2. Write unit tests for new functionality
+3. Use dependency injection
+4. Document new endpoints and features
+5. Follow existing code style and patterns
 
-Request body:
-```json
-{
-  "productIds": ["string"],
-  "market": "string",
-  "language": "string"
-}
-```
+## Deployment
+
+The service is deployed to Azure Functions using Azure DevOps pipelines. Contact the DevOps team for repository and deployment setup.
+
+## Monitoring
+
+- Application Insights is configured for monitoring and logging
+- Health check endpoint for service status verification
 
 ## Contributing
 
-1. Create a feature branch
+1. Create a feature branch from `main`
 2. Make your changes
-3. Run tests
-4. Submit a pull request
+3. Write/update tests
+4. Create a pull request
+5. Get code review and approval
 
-## License
+## Support
 
-Proprietary - Electrolux
+For any issues or questions, contact the development team or create an issue in the repository.
