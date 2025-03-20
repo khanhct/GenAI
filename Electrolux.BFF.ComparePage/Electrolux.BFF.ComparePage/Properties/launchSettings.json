@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Electrolux.BFF.ComparePage": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7296",
+      "launchBrowser": false
+    }
+  }
+}

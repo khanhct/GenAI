@@ -1,0 +1,3 @@
+[submodule "Electrolux.BFF.ComparePage/t1rearc-bff-core"]
+	path = Electrolux.BFF.ComparePage/t1rearc-bff-core
+	url = https://electrolux.visualstudio.com/DefaultCollection/T1/_git/t1rearc-bff-core
