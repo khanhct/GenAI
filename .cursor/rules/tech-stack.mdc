@@ -1,0 +1,174 @@
+---
+description: 
+globs: **/*.cs, **/*.csproj, **/host.json, **/local.settings.json
+alwaysApply: false
+---
+---
+Description: Technical stack rules for the e-commerce project
+Globs: **/*.cs, **/*.csproj, **/host.json, **/local.settings.json
+---
+
+# Technical Stack Rules
+
+## Purpose
+Defines the technical stack for an e-commerce backend built with ASP.NET Core, Azure Functions, and Optimizely, deployed on Azure.
+
+## Project Context
+- **Type**: E-commerce platform
+- **Scope**: Backend services, APIs, and serverless functions
+
+## Core Framework
+- **ASP.NET Core 8**
+  - Purpose: Foundation for APIs, services, and web components.
+  - Usage: Leverage minimal APIs in `Program.cs` or controllers for REST endpoints.
+  - Reference: `@Program.cs` for startup and middleware configuration.
+- **Azure Functions V4**
+  - Purpose: Serverless compute for event-driven tasks (e.g., order processing, notifications).
+  - Usage: Define functions with `[FunctionName]` and triggers (e.g., `[HttpTrigger]`, `[QueueTrigger]`).
+  - Reference: `@host.json` for runtime settings, `@local.settings.json` for local config.
+- **Optimizely**
+  - Purpose: Content management and experimentation platform.
+  - Usage: Integrate via Optimizely SDKs for CMS features and A/B testing.
+  - Reference: Official docs at https://www.optimizely.com/documentation/.
+
+## Database
+- **MongoDB**
+  - Purpose: NoSQL storage for flexible data (e.g., product catalogs, user preferences).
+  - Usage: Use MongoDB.Driver NuGet package for CRUD operations.
+- **SQL Server**
+  - Purpose: Relational storage for structured data (e.g., orders, transactions).
+  - Usage: Use Entity Framework Core with SQL Server provider for ORM.
+
+## Cache
+- **Azure Redis**
+  - Purpose: Distributed caching for performance optimization (e.g., session data, frequently accessed data).
+  - Usage: Use StackExchange.Redis or Microsoft.Extensions.Caching.StackExchangeRedis.
+- **Akamai CDN**
+  - Purpose: Content delivery for static assets (e.g., images, CSS).
+  - Usage: Configure via Azure integration or Akamai dashboard; no direct code interaction.
+
+## Authentication
+- **ASP.NET Identity & Session**
+  - Purpose: User authentication and session management.
+  - Usage: Configure in `Program.cs` with `AddIdentity` and `AddSession`; use cookie-based auth.
+
+## Infrastructure
+- **Azure Functions Service**
+  - Purpose: Hosts serverless functions with scalability.
+  - Usage: Deploy Functions app targeting .NET 8 and V4 runtime.
+- **Azure Redis Service**
+  - Purpose: Managed Redis instance for caching.
+  - Usage: Access via connection string in `@local.settings.json` or Azure App Settings.
+- **Azure Message Bus**
+  - Purpose: Messaging for async workflows (e.g., Service Bus queues/topics).
+  - Usage: Use Azure.Messaging.ServiceBus SDK for sending/receiving messages.
+
+## Deployment
+- **Azure DevOps Repository & Pipeline**
+  - Purpose: Source control and CI/CD automation.
+  - Usage: Code in `.cs` files is built and deployed via Azure Pipelines; no direct code impact.
+
+## Monitoring & Error Tracking
+- **Azure App Insights**
+  - Purpose: Telemetry and error tracking.
+  - Usage: Integrate via `AddApplicationInsightsTelemetry` in `Program.cs`; log with `ILogger`.
+- **Performance Monitoring**
+  - Purpose: Metrics for Azure Functions (e.g., execution time, invocation count).
+  - Usage: Monitored via Azure portal; no direct code configuration.
+
+## Testing
+- **Azure Testing**
+  - Purpose: Cloud-based testing environment.
+  - Usage: Tests run in Azure; no specific code requirements.
+- **xUnit Test Framework**
+  - Purpose: Unit and integration testing.
+  - Usage: Write tests in `.cs` files under a test project (e.g., `Tests/*.cs`).
+
+## Security
+- **HTTPS Enforcement**
+  - Purpose: Secure communication.
+  - Usage: Enabled via Azure Functions and ASP.NET Core middleware.
+- **API Rate Limiting**
+  - Purpose: Prevent abuse of APIs.
+  - Usage: Use `AspNetCoreRateLimit` NuGet package or custom middleware.
+- **Input Validation**
+  - Purpose: Ensure data integrity.
+  - Usage: Use data annotations (e.g., `[Required]`) and model validation.
+- **SQL Injection Prevention**
+  - Purpose: Secure SQL queries.
+  - Usage: Rely on EF Core parameterized queries; avoid raw SQL where possible.
+
+## Key Libraries
+- `Microsoft.EntityFrameworkCore.SqlServer`: EF Core for SQL Server.
+- `MongoDB.Driver`: MongoDB client library.
+- `Microsoft.Azure.Functions.Worker`: Azure Functions SDK.
+- `Microsoft.AspNetCore.Identity`: Authentication framework.
+- `Azure.Messaging.ServiceBus`: Message bus SDK.
+- `Microsoft.Extensions.Caching.StackExchangeRedis`: Redis caching.
+
+## Stack Constraints
+- Target .NET 8 for all components.
+- Ensure Azure Functions V4 compatibility.
+- Use Optimizely SDKs compatible with ASP.NET Core 8.
+
+## External Documentation
+- ASP.NET Core: https://learn.microsoft.com/en-us/aspnet/core/
+- Azure Functions: https://learn.microsoft.com/en-us/azure/azure-functions/
+- Optimizely: https://www.optimizely.com/documentation/
+- MongoDB .NET Driver: https://mongodb.github.io/mongo-csharp-driver/
+
+## API Design
+- Follow RESTful API design principles in your `HttpApi` layer.
+- Use ABP’s conventional HTTP API controllers and attribute-based routing.
+- Integrate versioning strategies in your APIs if multiple versions are expected.
+- Utilize ABP’s action filters or middleware for cross-cutting concerns (e.g., auditing).
+
+## Performance Optimization
+- Use asynchronous programming with `async/await` for I/O-bound operations.
+- Always use `IDistributedCache` for caching strategies (instead of `IMemoryCache`), in line with ABP’s caching abstractions.
+- Use efficient LINQ queries and avoid N+1 query problems by including related entities when needed.
+- Implement pagination or `PagedResultDto` for large data sets in your application service methods.
+
+## Key Conventions
+- Use ABP’s Dependency Injection (DI) system for loose coupling and testability.
+- Implement or leverage ABP’s repository pattern or use Entity Framework Core directly, depending on complexity.
+- Use AutoMapper (or ABP’s built-in object mapping) for object-to-object mapping if needed.
+- Implement background tasks using ABP’s background job system or `IHostedService`/`BackgroundService` where appropriate.
+- Follow ABP’s recommended approach for domain events and entities (e.g., using `AuditedAggregateRoot`, `FullAuditedEntity`).
+- Keep business rules in the **Domain layer**. Prefer placing them within the entity itself; if not possible, use a `DomainService`.
+- Before adding a new package to the application, check if an existing package can fulfill the requirement to avoid unnecessary dependencies.
+- Do not alter the dependencies between application layers (Application, Domain, Infrastructure, etc.).
+
+**Domain Best Practices**  
+- [Domain Services Best Practices](https://abp.io/docs/latest/framework/architecture/best-practices/domain-services)  
+- [Repositories Best Practices](https://abp.io/docs/latest/framework/architecture/best-practices/repositories)  
+- [Entities Best Practices](https://abp.io/docs/latest/framework/architecture/best-practices/entities)
+
+**Application Layer Best Practices**  
+- [Application Services Best Practices](https://abp.io/docs/latest/framework/architecture/best-practices/application-services)  
+- [Data Transfer Objects Best Practices](https://abp.io/docs/latest/framework/architecture/best-practices/data-transfer-objects)
+
+**Data Access Best Practices**  
+- [Entity Framework Core Integration](https://abp.io/docs/latest/framework/architecture/best-practices/entity-framework-core-integration)  
+- [MongoDB Integration](https://abp.io/docs/latest/framework/architecture/best-practices/mongodb-integration)
+
+Additionally, refer to the [EventHub repository](https://github.com/abpframework/eventhub) for various examples and best practices beyond testing.
+
+## Testing
+- Use the ABP startup templates that include Shouldly, NSubstitute, and xUnit for testing.
+- Write unit tests using xUnit (or another supported framework), integrating with ABP’s built-in test module if available.
+- Use NSubstitute (or a similar library) for mocking dependencies.
+- Implement integration tests for your modules (e.g., `Application.Tests`, `Domain.Tests`), leveraging ABP’s test base classes.
+
+## Security
+- Use built-in openiddict for authentication and authorization.
+- Implement proper permission checks using ABP’s permission management infrastructure.
+- Use HTTPS and enforce SSL.
+- Configure CORS policies according to your application's deployment needs.
+
+## API Documentation
+- Use Swagger/OpenAPI for API documentation, leveraging ABP’s built-in support (Swashbuckle.AspNetCore or NSwag).
+- Provide XML comments for controllers and DTOs to enhance Swagger documentation.
+- Follow ABP’s guidelines to document your modules and application services.
+
+Adhere to official Microsoft documentation, ASP.NET Core guides, and ABP’s documentation (https://docs.abp.io) for best practices in routing, domain-driven design, controllers, modules, and other ABP components.

@@ -1,0 +1,55 @@
+---
+description: 
+globs: **/*.cs, **/*.csproj, **/host.json, **/local.settings.json
+alwaysApply: false
+---
+# C# Coding Rules for ASP.NET Core and Azure Functions
+# Based on Microsoft Guidelines: Identifier Names and Coding Conventions
+# Framework: .NET 8, ASP.NET Core, Azure Functions
+
+## General Guidelines
+- Prioritize readability and consistency.
+- Use full words in identifiers (e.g., `user` not `usr`).
+- Leverage C# features (e.g., `var`, null operators).
+
+## Naming Conventions
+- Classes/Structs/Enums: PascalCase (e.g., `UserService`, `OrderStatus`).
+- Interfaces: IPascalCase (e.g., `IUserRepository`).
+- Methods: PascalCase (e.g., `GetUserById`).
+- Properties: PascalCase (e.g., `FirstName`).
+- Private Fields: _camelCase (e.g., `_logger`).
+- Variables/Parameters: camelCase (e.g., `userId`, `requestData`).
+- Constants: UPPER_CASE (e.g., `MAX_RETRIES`).
+
+## Code Organization
+- One class per file (e.g., `UserService.cs`).
+- Use folders: `Controllers/`, `Models/`, `Functions/`.
+- Namespace matches folder (e.g., `MyProject.Controllers`).
+
+## Language Usage
+- Use `var` for obvious types: `var user = new User();`.
+- Expression-bodied: `public int Count => items.Count;`.
+- Null safety: `user?.Name ?? "Unknown"`.
+- Single-line statements without braces: `if (x > 0) return x;`.
+
+## ASP.NET Core
+- Controllers: `UsersController` in `Controllers/`.
+- Routing: `[Route("api/[controller]")]`.
+- DI: `public UsersController(IUserService service)`.
+- Actions: `public async Task<IActionResult> Get() => Ok();`.
+- Models: `UserDto` in `Models/`.
+
+## Azure Functions
+- Functions: `QueueProcessor` in `Functions/`.
+- Triggers: `[HttpTrigger(AuthorizationLevel.Function, "get")]`.
+- Async: `public async Task Run([HttpTrigger] HttpRequestData req)`.
+
+## Error Handling
+- Log with ILogger: `_logger.LogError(ex, "Error occurred")`.
+- JSON errors: `return BadRequest(new { error = "Invalid input" });`.
+
+## Syntax and Formatting
+- Follow the C# Coding Conventions (https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions).
+- Use C#’s expressive syntax (e.g., null-conditional operators, string interpolation).
+- Use `var` for implicit typing when the type is obvious.
+- Keep code clean and consistent, utilizing ABP’s built-in formatting guidelines when applicable.

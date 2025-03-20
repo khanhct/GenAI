@@ -1,0 +1,47 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Overview
+
+## Vision Statement
+To create a scalable, high-performance e-commerce platform that delivers seamless shopping experiences, personalized content, and efficient order processing, leveraging modern cloud-native technologies and experimentation capabilities.
+
+## Main Goals
+- **Deliver a Robust E-commerce Backend**: Build a reliable system using ASP.NET Core 8 and Azure Functions V4 to handle core e-commerce functionalities such as product management, order processing, and user authentication.
+- **Enable Content Personalization**: Integrate Optimizely to provide dynamic content management and A/B testing, enhancing customer engagement and conversion rates.
+- **Ensure Scalability and Performance**: Utilize Azure infrastructure (Functions, Redis, Message Bus) and Akamai CDN to support high traffic and low-latency experiences globally.
+- **Secure and Maintainable System**: Implement strong security measures (HTTPS, rate limiting, input validation) and comprehensive monitoring (Azure App Insights) to ensure uptime and data integrity.
+- **Streamline Development and Deployment**: Leverage Azure DevOps for CI/CD and xUnit for testing to maintain a rapid, reliable development lifecycle.
+
+## Problem Statement
+Traditional e-commerce platforms often struggle with:
+- Scalability under peak loads.
+- Flexibility in content delivery.
+- Security and performance challenges across diverse customer bases.
+
+This project aims to solve these issues by:
+- Providing a **serverless, scalable backend** with Azure Functions to handle fluctuating demand efficiently.
+- Using **Optimizely** to empower real-time content experimentation and personalization without compromising performance.
+- Integrating **dual-database support** (MongoDB for flexibility, SQL Server for structured data) to meet varied data needs.
+- Employing **Azure Redis and Akamai CDN** for caching and content delivery to reduce latency and improve user experience.
+- Ensuring **robust security and monitoring** to protect user data and maintain system reliability.
+
+## High-Level Explanation
+This cloud-native e-commerce solution combines:
+- **ASP.NET Core 8** for structured APIs.
+- **Azure Functions V4** for event-driven processes (e.g., order fulfillment, notifications).
+- **Optimizely** for content management and experimentation.
+- **MongoDB** for flexible product and user data.
+- **SQL Server** for transactional integrity.
+- **Azure infrastructure (Redis, Message Bus)** for performance and async workflows.
+- **Azure DevOps pipelines** for deployment to the Azure Functions service, ensuring rapid iteration and scalability.
+- **Security features** like HTTPS enforcement and API rate limiting, paired with **Azure App Insights** for monitoring.
+
+This architecture addresses the need for a **fast, secure, and adaptable e-commerce ecosystem** that can grow with business demands and enhance customer experiences.
+
+## How to Use This
+- **Save It**: Place this in your project’s documentation folder (e.g., `.cursor/rules/project-overview.mdc`).
+- **Reference in Cursor**: Mention `@.cursor/rules/project-overview.mdc` in your Cursor AI prompts to provide context about your project’s vision and goals.
+- **Guide Decisions**: Use this as the **"north star"** for your team and AI assistance, ensuring alignment with the project’s purpose.

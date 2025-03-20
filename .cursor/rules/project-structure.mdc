@@ -1,0 +1,106 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Electrolux.BFF.Global Project Structure
+
+## Overview
+This document outlines the structure of the **Electrolux.BFF.{Name}** project. {Name} is the name of project such as: if project name is Home Page then value of {Name} is HomePage.It serves as a reference for understanding the organization of the codebase, including constants, DTOs, functions, models, and services.
+
+## Directory Structure
+t1rearc-bff-{Name}
+│
+├── Electrolux.BFF.{Name}
+│   ├── Constants
+│   │   ├── Constants.cs
+│   │
+│   ├── Dtos
+│   │   ├── UpdateRouteRequest.cs
+│   │   ├── UpdateRouteResponse.cs
+│   │
+│   ├── Functions
+│   │   ├── RoutingFunction.cs
+│   │
+│   ├── Models
+│   │   ├── RoutingCacheModel.cs
+│   │
+│   ├── Properties
+│   │   ├── serviceDependencies.json
+│   │   ├── serviceDependencies.local.json
+│   │
+│   ├── Services
+│   │   ├── Handlers
+│   │   │   ├── GetErrorPagePropsHandler.cs
+│   │   │   ├── GetRedirectSlugHandler.cs
+│   │   │
+│   │   ├── Interfaces
+│   │   │   ├── IPageService.cs
+│   │   │   ├── IRoutingService.cs
+│   │   │
+│   │   ├── PageService.cs
+│   │   ├── RoutingService.cs
+│   │
+│   ├── .gitignore
+│   ├── App.cs
+│   ├── appsettings.json
+│   ├── Electrolux.BFF.{Name}.csproj
+│   ├── host.json
+│   ├── Program.cs
+│
+├── Electrolux.BFF.{Name}.Tests
+│   │── Constants/
+│   │   └── Constants.cs
+│   │── Functions/s
+│   │   └── RoutingFunctionTests.cs
+│   │── Services/
+│   │   ├── Handlers/
+│   │   ├── Interfaces/
+│   │   └── RoutingServiceTests.cs
+│   │── Electrolux.BFF.{Name}.Tests.csproj
+├── .gitmodules
+├── .runsettings
+├── azure-pipelines.yml
+├── elux.ruleset
+├── GitVersion.yml
+├── nuget.config
+├── README.md
+├── T1ReArcBFF.sln
+
+## Components Breakdown
+
+### **1. Constants**
+- **`Constants.cs`**: Defines global constants used throughout the application.
+
+### **2. DTOs (Data Transfer Objects)**
+- **Contains request and response models for various functionalities, including:**
+  - Route update operations (`UpdateRouteRequest.cs`, `UpdateRouteResponse.cs`)
+
+### **3. Functions (Azure Functions)**
+- **Handles serverless execution of key features:**
+  - Routing management (`RoutingFunction.cs`)
+
+### **4. Models**
+- **Defines the data structures used in the system:**
+  - Route caching (`RoutingCacheModel.cs`)
+
+### **5. Properties**
+- **Stores configuration settings:**
+  - `serviceDependencies.json`: Defines external service dependencies.
+  - `serviceDependencies.local.json`: Overrides dependencies for local development.
+
+### **6. Services**
+- **Contains core business logic:**
+  - `Handlers/`: Business logic handlers.
+  - `Interfaces/`: Defines contracts for services.
+  - `RoutingService.cs`: Handles route management and resolution.
+
+### **7.Electrolux.BFF.{Name}**
+- **Handle bussiness login and expose functionality**
+
+### **8.Electrolux.BFF.{Name}.Tests**
+- **Contains unit tests**
+
+### **Initialize git module**
+- Use command to initilize gitmodules `git submodule add https://electrolux.visualstudio.com/DefaultCollection/T1/_git/t1rearc-bff-core` and `git subodule init`
+
